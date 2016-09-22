@@ -1,0 +1,100 @@
+.mn-case{
+    border: 2px solid #111;
+    width: 185px;
+    height: 250px;
+    text-align:center;
+    float:left;
+    position: relative;
+    background: #A7E9DB;
+    overflow: hidden;
+    margin-right:-2px;
+}
+
+.mn-case.mn-case-corner {
+    width:250px;
+    height:250px;
+}
+
+.mn-case .mn-case-content{
+    transform: rotate(180deg);
+    transform-origin: center center;
+    width: 185px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.mn-case.mn-case-corner .mn-case-content{
+    transform: rotate(135deg);
+    transform-origin: center center;
+    width:250px;
+    height:250px;
+    overflow: hidden;
+
+}
+
+.mn-case.mn-case-corner .mn-case-title{
+    margin-top:30px;
+    font-size: 200%;
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mn-case.mn-case-corner .mn-case-color,
+.mn-case.mn-case-holding .mn-case-color,
+.mn-case.mn-case-luck .mn-case-color,
+.mn-case.mn-case-tax .mn-case-color,
+.mn-case.mn-case-community .mn-case-color{
+    display: none;
+}
+
+.mn-case .mn-case-color {
+    height:50px;
+    border-bottom: 2px solid #111;
+}
+
+.mn-case .mn-case-title{
+    font-size: 88%;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mn-case hr {
+    border: 1px solid #111;
+    width:25%;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+.mn-case img {
+    max-width: 40%;
+    position: absolute;
+    bottom: 5%;
+    margin-left: -20%;
+    left: 50%;
+}
+
+.mn-case .mn-case-price{
+    font-size: 110%;
+}
+
+.mn-case.mn-case-tax .mn-case-price{
+    position: absolute;
+    bottom: 20px;
+    left:0px;
+    right:0px;
+    text-align: center;
+    font-size: 150%;
+}
+
+.mn-case.mn-case-luck img,
+.mn-case.mn-case-holding img,
+.mn-case.mn-case-community img {
+    max-width: 60%;
+    position: absolute;
+    bottom: 5%;
+    margin-left: -30%;
+    left: 50%;
+}

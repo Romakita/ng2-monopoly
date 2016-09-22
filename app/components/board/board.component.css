@@ -1,0 +1,49 @@
+.mn-board {
+    width:100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+.mn-board .mn-board-wrapper{
+    position: relative;
+    width: calc(195px * 11);
+    height: calc(195px * 11);
+    transform: scale(0.4, 0.4);
+    transform-origin: left top;
+    background: #A7E9DB;
+}
+.mn-board .mn-board-wrapper > div  {
+    width: calc(195px * 11);
+    height: calc(195px * 11);
+    position: absolute;
+    top:0px;
+    left:0px;
+    transform-origin: center center;
+}
+
+.mn-board .mn-board-group-1 {
+    transform: rotate(0deg);
+}
+
+.mn-board .mn-board-group-2 {
+    transform: rotate(90deg);
+}
+
+.mn-board .mn-board-group-3 {
+    transform: rotate(180deg);
+}
+
+.mn-board .mn-board-group-4 {
+     transform: rotate(-90deg);
+}/**/
+
+.mn-board .mn-board-wrapper > div > div {
+    width: calc(195px * 11);
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+
+.mn-board div .mn-case {
+    float: left;
+}

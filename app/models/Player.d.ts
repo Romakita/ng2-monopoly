@@ -1,3 +1,3 @@
-export interface IPlayer{
+declare interface IPlayer{
     name: string;
 }

@@ -10,11 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var http_1 = require('@angular/http');
+var forms_1 = require('@angular/forms');
+var app_routes_1 = require('./app.routes');
 var app_component_1 = require('./app.component');
 var players_component_1 = require('./components/players/players.component');
+var board_component_1 = require('./components/board/board.component');
+var case_component_1 = require('./components/case/case.component');
+var navbar_component_1 = require('./components/navbar/navbar.component');
+var boardView_component_1 = require('./components/boardView/boardView.component');
+var playersView_component_1 = require('./components/playersView/playersView.component');
+var cases_service_1 = require('./services/cases/cases.service');
 var players_service_1 = require('./services/players/players.service');
 var fake_players_service_1 = require('./services/players/fake-players.service');
-var http_1 = require('@angular/http');
 var AppModule = (function () {
     function AppModule() {
         console.log('Start appModule');
@@ -24,16 +32,25 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
-                http_1.JsonpModule
+                http_1.JsonpModule,
+                forms_1.FormsModule,
+                app_routes_1.routing
             ],
             // Components depedencies
             declarations: [
                 app_component_1.default,
-                players_component_1.default
+                players_component_1.default,
+                board_component_1.default,
+                case_component_1.default,
+                navbar_component_1.default,
+                boardView_component_1.default,
+                playersView_component_1.default
             ],
             // Services depedencies
             providers: [
-                { provide: players_service_1.default, useClass: fake_players_service_1.default }
+                { provide: players_service_1.default, useClass: fake_players_service_1.default },
+                cases_service_1.default,
+                app_routes_1.appRoutingProviders
             ],
             // Main components
             bootstrap: [
@@ -45,5 +62,4 @@ var AppModule = (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
-console.log('Loaded appModule');
 //# sourceMappingURL=app.module.js.map

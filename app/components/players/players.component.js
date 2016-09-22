@@ -21,7 +21,8 @@ var PlayersComponent = (function () {
     PlayersComponent = __decorate([
         core_1.Component({
             selector: 'mn-players',
-            template: "\n    <div *ngFor=\"let player of players\">\n        {{player.name}}\n    </div>\n    "
+            templateUrl: 'players.component.html',
+            moduleId: module.id
         }), 
         __metadata('design:paramtypes', [])
     ], PlayersComponent);

@@ -1,0 +1,19 @@
+<div class="mn-case mn-case-{{caseInfo?.type}}" [class.mn-case-corner]="isCaseCorner">
+    <div class="mn-case-content">
+        <div class="mn-case-color" [style.background]="backgroundColor || '#FFFFFF'">
+
+        </div>
+
+        <h2 class="mn-case-title">
+            {{name}}
+        </h2>
+
+        <hr />
+
+        <div class="mn-case-price" [hidden]="!caseInfo?.price">
+            {{caseInfo?.price}} €
+        </div>
+
+        <img src="/app/assets/images/{{svg}}.svg" [hidden]="!svg"/>
+    </div>
+</div>

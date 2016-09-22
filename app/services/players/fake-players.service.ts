@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Rx';
-import {IPlayer} from '../../models/Player';
-
 
 @Injectable()
 export default class FakePlayersService {

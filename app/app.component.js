@@ -9,26 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var players_service_1 = require('./services/players/players.service');
 var AppComponent = (function () {
-    function AppComponent(playersService) {
-        var _this = this;
-        this.playersService = playersService;
+    function AppComponent() {
         this.version = 1.0;
-        playersService
-            .getPlayers()
-            .subscribe(function (players) {
-            _this.players = players;
-        });
     }
     AppComponent.prototype.ngOnInit = function () {
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'mn-app',
-            template: "\n        <h1>Monopoly v{{version | number}} </h1>\n        <mn-players [players]=\"players\"></mn-players>\n        "
+            templateUrl: "app.component.html",
+            moduleId: module.id
         }), 
-        __metadata('design:paramtypes', [players_service_1.default])
+        __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());

@@ -1,0 +1,48 @@
+<div class="mn-board"
+     #mnBoard
+     [style.height.px]="boardHeight"
+     (window:resize)="onResize($event)">
+
+    <div class="mn-board-wrapper"
+         #mnBoardWrapper
+         [style.transform]="scale">
+
+        <div class="mn-board-group-1">
+            <div>
+                <mn-case *ngFor="let case of cases | slice : 0 : 10" [caseInfo]="case"></mn-case>
+            </div>
+        </div>
+
+        <div  class="mn-board-group-2">
+            <div>
+                <mn-case *ngFor="let case of  cases | slice : 10 : 20"  [caseInfo]="case"></mn-case>
+            </div>
+        </div>
+
+        <div  class="mn-board-group-3">
+            <div>
+                <mn-case *ngFor="let case of  cases | slice : 20 : 30"  [caseInfo]="case"></mn-case>
+            </div>
+        </div>
+
+        <div  class="mn-board-group-4">
+            <div>
+                <mn-case *ngFor="let case of  cases | slice : 30 : 40"  [caseInfo]="case"></mn-case>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
+        <hr />
+
+        <div [style.width]="220 * 20">
+            <mn-case  *ngFor="let case of  cases | slice : 20 : 30" [caseInfo]="case"></mn-case>
+        </div>
+
+        <hr />
+
+        <div [style.width]="220 * 20">
+            <mn-case *ngFor="let case of  cases | slice : 30 : 39" [caseInfo]="case"></mn-case>
+        </div>-->
+</div>

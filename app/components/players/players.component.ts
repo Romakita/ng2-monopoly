@@ -1,13 +1,9 @@
 import {Component, Inject, Input } from '@angular/core';
-import {IPlayer} from '../../models/Player';
 
 @Component({
-    selector:'mn-players',
-    template:`
-    <div *ngFor="let player of players">
-        {{player.name}}
-    </div>
-    `
+    selector: 'mn-players',
+    templateUrl: 'players.component.html',
+    moduleId: module.id
 })
 export default class PlayersComponent {
     @Input()
