@@ -19,10 +19,12 @@ var board_component_1 = require('./components/board/board.component');
 var case_component_1 = require('./components/case/case.component');
 var navbar_component_1 = require('./components/navbar/navbar.component');
 var boardView_component_1 = require('./components/boardView/boardView.component');
-var playersView_component_1 = require('./components/playersView/playersView.component');
+var newGameView_component_1 = require('./components/newGameView/newGameView.component');
 var cases_service_1 = require('./services/cases/cases.service');
 var players_service_1 = require('./services/players/players.service');
-var fake_players_service_1 = require('./services/players/fake-players.service');
+var fakePlayers_service_1 = require('./services/players/fakePlayers.service');
+var localStorage_service_1 = require('./services/localStorage/localStorage.service');
+var input_component_1 = require('./components/input/input.component');
 var AppModule = (function () {
     function AppModule() {
         console.log('Start appModule');
@@ -44,13 +46,15 @@ var AppModule = (function () {
                 case_component_1.default,
                 navbar_component_1.default,
                 boardView_component_1.default,
-                playersView_component_1.default
+                newGameView_component_1.default,
+                input_component_1.default
             ],
             // Services depedencies
             providers: [
-                { provide: players_service_1.default, useClass: fake_players_service_1.default },
+                { provide: players_service_1.default, useClass: fakePlayers_service_1.default },
                 cases_service_1.default,
-                app_routes_1.appRoutingProviders
+                app_routes_1.appRoutingProviders,
+                localStorage_service_1.LocalStorageService
             ],
             // Main components
             bootstrap: [

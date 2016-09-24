@@ -10,11 +10,13 @@ import BoardComponent from './components/board/board.component';
 import CaseComponent from './components/case/case.component';
 import NavbarComponent from './components/navbar/navbar.component';
 import BoardViewComponent from './components/boardView/boardView.component';
-import PlayersViewComponent from './components/playersView/playersView.component';
+import NewGameViewComponent from './components/newGameView/newGameView.component';
 
 import CasesService from './services/cases/cases.service';
 import PlayersService from './services/players/players.service';
-import FakePlayersService from './services/players/fake-players.service';
+import FakePlayersService from './services/players/fakePlayers.service';
+import {LocalStorageService} from './services/localStorage/localStorage.service';
+import MaterializeInputDirective from './components/input/input.component';
 
 @NgModule({
 
@@ -34,14 +36,16 @@ import FakePlayersService from './services/players/fake-players.service';
         CaseComponent,
         NavbarComponent,
         BoardViewComponent,
-        PlayersViewComponent
+        NewGameViewComponent,
+        MaterializeInputDirective
     ],
 
     // Services depedencies
     providers: [
         {provide: PlayersService, useClass: FakePlayersService},
         CasesService,
-        appRoutingProviders
+        appRoutingProviders,
+        LocalStorageService
     ],
 
     // Main components

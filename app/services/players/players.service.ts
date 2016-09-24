@@ -11,12 +11,27 @@ export default class PlayersService {
 
     }
 
+    setPlayers(players: IPlayer[]): Observable<IPlayer[]> {
+        return this.http
+            .post(`rest/players`, {players: players})
+            .map((response: Response) => response.json())
+            .map((players) => {
+                return players.forEach((player, index) => {
+                    player.id = index;
+                });
+            });
+    }
     /**
      *
      */
-    getPlayers = (): Observable<IPlayer[]> => {
+    getPlayers(): Observable<IPlayer[]> {
         return this.http
             .get(`rest/players`)
             .map((response: Response) => response.json())
+            .map((players) => {
+                return players.forEach((player, index) => {
+                    player.id = index;
+                });
+            });
     }
 }

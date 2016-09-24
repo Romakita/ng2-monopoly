@@ -1,0 +1,90 @@
+
+<div class="container">
+    <form (submit)="submit()" #playersForm="ngForm" novalidate>
+
+        <h3>New Game</h3>
+        <div class="row row-player">
+
+            <div class="col s12"
+                  *ngFor="let player of players; let playerIndex = index"
+                  (submit)="submit()"
+                  novalidate>
+
+                <div class="row z-depth-1" >
+
+                    <div class="col s4">
+                        <div class="input-field">
+
+                            <input id="last_name"
+                                   placeholder="Type your player name"
+                                   [name]="'lastName' + playerIndex"
+                                   type="text"
+                                   [(ngModel)]="player.name"
+                                   required
+                                   maxlength="20"
+                                   #playerName="ngModel">
+
+                            <label for="last_name">Player Name</label>
+                        </div>
+
+                        <div class="red-text text-lighten-2" *ngIf="playerName.control.dirty && playerName.control.hasError('required')">
+                            Player name is required
+                        </div>
+                    </div>
+
+                    <div class="col s7">
+
+                        <div  *ngIf="!!player.name">
+
+                            <div *ngFor="let pawn of PAWNS; let i = index;" style="float:left">
+
+                                <span class="mn-radio-content">
+
+                                    <input class="with-gap"
+                                           type="radio"
+                                           [name]="'pawnGroup' + playerIndex"
+                                           [id]="'pawnGroup' + i + '' + playerIndex"
+                                           [value]="pawn"
+                                           *ngIf="isFreePawn(pawn.icon, player.id)"
+                                           [(ngModel)]="player.pawn"
+                                           required />
+
+                                    <label [attr.for]="'pawnGroup' + i + '' + playerIndex">
+                                        <i class="material-icons circle {{pawn.color}}">{{pawn.icon}}</i>
+                                    </label>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col s1" *ngIf="players.length > 2">
+                        <div class="valign-wrapper center-align">
+                            <a class="btn-floating waves-effect waves-light valign grey" (click)="deletePlayer(playerIndex)">
+                                <i class="material-icons">remove</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div *ngIf="players.length < PAWNS.length">
+            <a class="waves-effect waves-light btn blue lighten-2" (click)="addPlayer()">
+                <i class="material-icons left">add</i> Add
+            </a>
+        </div>
+
+        <div class="right-align">
+            <button type="submit" class="btn waves-effect waves-ligth" [disabled]="!playersForm.valid">
+                Start new Game
+            </button>
+        </div>
+
+    </form>
+</div>

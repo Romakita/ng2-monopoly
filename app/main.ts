@@ -10,6 +10,6 @@ import  {AppModule} from './app.module'
 /*
  * Bootstrap our Angular app with a top level NgModule
  */
-platformBrowserDynamic()
+let appPromise = platformBrowserDynamic()
     .bootstrapModule(AppModule)
     .catch(e => console.log(e));

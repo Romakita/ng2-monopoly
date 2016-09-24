@@ -8,7 +8,7 @@ var app_module_1 = require('./app.module');
 /*
  * Bootstrap our Angular app with a top level NgModule
  */
-platform_browser_dynamic_1.platformBrowserDynamic()
+var appPromise = platform_browser_dynamic_1.platformBrowserDynamic()
     .bootstrapModule(app_module_1.AppModule)
     .catch(function (e) { return console.log(e); });
 //# sourceMappingURL=main.js.map

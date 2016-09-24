@@ -14,7 +14,8 @@
     ],
     "types": [
       "node",
-      "hammerjs"
+      "hammerjs",
+      "jquery"
     ]
   },
   "exclude": [

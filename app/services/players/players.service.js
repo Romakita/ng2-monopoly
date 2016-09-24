@@ -13,17 +13,31 @@ var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var PlayersService = (function () {
     function PlayersService(http) {
-        var _this = this;
         this.http = http;
-        /**
-         *
-         */
-        this.getPlayers = function () {
-            return _this.http
-                .get("rest/players")
-                .map(function (response) { return response.json(); });
-        };
     }
+    PlayersService.prototype.setPlayers = function (players) {
+        return this.http
+            .post("rest/players", { players: players })
+            .map(function (response) { return response.json(); })
+            .map(function (players) {
+            return players.forEach(function (player, index) {
+                player.id = index;
+            });
+        });
+    };
+    /**
+     *
+     */
+    PlayersService.prototype.getPlayers = function () {
+        return this.http
+            .get("rest/players")
+            .map(function (response) { return response.json(); })
+            .map(function (players) {
+            return players.forEach(function (player, index) {
+                player.id = index;
+            });
+        });
+    };
     PlayersService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

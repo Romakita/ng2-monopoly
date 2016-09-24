@@ -13,6 +13,7 @@
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "3.0.0",
     "@angular/upgrade": "2.0.0",
+    "@types/jquery": "^2.0.32",
     "angular2-in-memory-web-api": "0.0.20",
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.1",
@@ -27,6 +28,7 @@
     "@types/core-js": "^0.9.28",
     "@types/hammerjs": "^2.0.33",
     "@types/node": "^6.0.38",
+    "amplifyjs": "^1.1.2-beta.2",
     "concurrently": "^2.2.0",
     "lite-server": "^2.2.2",
     "typescript": "^2.0.2"
