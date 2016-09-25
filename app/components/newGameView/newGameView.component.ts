@@ -2,6 +2,7 @@ import {ViewEncapsulation, Component} from '@angular/core';
 import PlayersService from '../../services/players/players.service';
 import {PAWNS} from '../../constants/pawns.constant';
 import {Router} from '@angular/router';
+import MonopolyService from '../../services/monopoly/monopoly.service';
 
 @Component({
     selector: 'mn-board-view',
@@ -15,7 +16,11 @@ export default class NewGameViewComponent {
     players: IPlayer[];
     PAWNS: IPawn[] = PAWNS;
 
-    constructor(private playersService: PlayersService, private router: Router) { //
+    constructor(
+        private playersService: PlayersService,
+        private monopolyService: MonopolyService,
+        private router: Router
+    ) { //
 
         playersService
             .getPlayers()
@@ -55,16 +60,30 @@ export default class NewGameViewComponent {
         return !find;
     }
 
+    /**
+     *
+     */
     private addPlayer(){
         this.players.push(<IPlayer> {id: this.players.length});
     }
 
+    /**
+     *
+     * @param index
+     */
     private deletePlayer(index){
         this.players.splice(index, 1);
     }
 
+    /**
+     *
+     */
     private submit() {
-        this.playersService.setPlayers(this.players);
-        this.router.navigateByUrl('/');
+
+        this.monopolyService
+            .initializeGame(this.players)
+            .subscribe(() => {
+                this.router.navigateByUrl('/');
+            });
     }
 }

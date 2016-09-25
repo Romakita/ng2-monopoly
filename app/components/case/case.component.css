@@ -98,3 +98,13 @@
     margin-left: -30%;
     left: 50%;
 }
+
+.mn-case .mn-pawns{
+    position: absolute;
+    z-index: 100;
+    transform: scale(2) translate(0%, 25%);
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}

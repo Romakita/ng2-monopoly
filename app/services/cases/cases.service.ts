@@ -18,9 +18,11 @@ export default class CasesService {
         return this.http
             .get(`app/data/cases.json`)
             .map((response: Response) => response.json())
-            .map(cases => {
+            .map((cases, index) => {
 
-                cases.forEach((theCase: ICaseProperty) => {
+                cases.forEach((theCase: ICaseProperty, index) => {
+
+                    theCase.location = index;
 
                     if (theCase.price){
                         theCase.price /= 10;

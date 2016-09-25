@@ -1,13 +1,18 @@
 
-<ul class="collection">
+<div *ngFor="let player of players" class="player">
 
-    <li class="collection-item avatar" *ngFor="let player of players">
-        <i class="material-icons circle">person_pin</i>
-        <span class="title">{{player.name}}</span>
-        <p>$20000
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
+    <mn-pawn [player]="player"></mn-pawn>
 
-</ul>
+    <br />
+
+    <span class="player-info">
+        <fa [name]="'money'" class="green-text"></fa> {{player?.money | number : '1.0-0'}} €
+    </span>
+
+    <span class="player-info">
+        <fa [name]="'home'" class="green-text"></fa> 0
+    </span>
+
+</div>
+
 

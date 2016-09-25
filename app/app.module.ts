@@ -16,7 +16,11 @@ import CasesService from './services/cases/cases.service';
 import PlayersService from './services/players/players.service';
 import FakePlayersService from './services/players/fakePlayers.service';
 import {LocalStorageService} from './services/localStorage/localStorage.service';
+import MonopolyService from './services/monopoly/monopoly.service';
 import MaterializeInputDirective from './components/input/input.component';
+import PawnComponent from './components/pawn/pawn.component';
+import {FaComponent} from 'angular2-fontawesome/components';
+import {CasePlayersPipe} from './pipes/casePlayers.pipe';
 
 @NgModule({
 
@@ -37,7 +41,10 @@ import MaterializeInputDirective from './components/input/input.component';
         NavbarComponent,
         BoardViewComponent,
         NewGameViewComponent,
-        MaterializeInputDirective
+        MaterializeInputDirective,
+        PawnComponent,
+        FaComponent,
+        CasePlayersPipe
     ],
 
     // Services depedencies
@@ -45,7 +52,8 @@ import MaterializeInputDirective from './components/input/input.component';
         {provide: PlayersService, useClass: FakePlayersService},
         CasesService,
         appRoutingProviders,
-        LocalStorageService
+        LocalStorageService,
+        MonopolyService
     ],
 
     // Main components

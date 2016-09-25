@@ -11,6 +11,10 @@ import {Component, Inject, ViewEncapsulation, Input} from '@angular/core';
 export default class CaseComponent {
 
     private _caseInfo: ICase;
+
+    @Input()
+    private players: IPlayer[];
+
     private backgroundColor: string;
     private name: string;
     private svg: string;
@@ -59,8 +63,6 @@ export default class CaseComponent {
                 this.svg = caseHolding.type;
                 break;
 
-
-
             case "community":
                 let caseCommunity = <ICaseCommunity> value;
                 this.name = "Communauté";
@@ -88,4 +90,5 @@ export default class CaseComponent {
     get caseInfo(){
         return this._caseInfo;
     }
+
 }

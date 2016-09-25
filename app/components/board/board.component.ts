@@ -1,56 +1,45 @@
 
-import {Component, Inject, ViewEncapsulation, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
-import CasesService from '../../services/cases/cases.service';
+import {
+    Component,
+    ViewEncapsulation,
+    ViewChild,
+    ElementRef,
+    AfterViewInit,
+    Input,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef
+} from '@angular/core';
 
 @Component({
     selector: 'mn-board',
     templateUrl: 'board.component.html',
     styleUrls: ['board.component.css'],
     moduleId: module.id,
-    encapsulation: ViewEncapsulation.Emulated
+    encapsulation: ViewEncapsulation.Emulated,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class BoardComponent implements OnInit, AfterViewInit {
+export default class BoardComponent implements AfterViewInit {
 
+    @Input()
     private cases: ICase[];
+
+    @Input()
+    private players: IPlayer[];
 
     @ViewChild('mnBoard')
     private mnBoardElement: ElementRef;
+
     @ViewChild('mnBoardWrapper')
     private mnBoardWrapperElement: ElementRef;
 
-    private boardHeight: number;
-
-    private scale: string;
-
-    constructor(private casesService: CasesService){
+    constructor(
+        private cd: ChangeDetectorRef
+    ) {
 
     }
 
-    /**
-     * Called when component is initialized with all input data.
-     */
-    ngOnInit(){
-        this.getCases();
-    }
-
-    /**
-     * Called when view component is initialized.
-     */
     ngAfterViewInit(){
-        setTimeout(this.resize);
-    }
-
-    /**
-     * Get all cases an build board.
-     * @returns {Subscription}
-     */
-    private getCases(){
-        return this
-            .casesService
-            .getCases()
-            .subscribe((cases) => {
-                this.cases = cases;
-            });
+        this.resize();
     }
 
     /**
@@ -65,14 +54,13 @@ export default class BoardComponent implements OnInit, AfterViewInit {
      * Calculate viewport of the board.
      */
     private resize = ()=> {
-        console.log('Board height', this.mnBoardElement.nativeElement.offsetWidth);
 
         const width = +this.mnBoardElement.nativeElement.offsetWidth;
+        const height = +this.mnBoardElement.nativeElement.offsetHeight;
         const widthWrapper = +this.mnBoardWrapperElement.nativeElement.offsetWidth;
+        const ref = Math.min(width, height);
 
-        this.boardHeight = +this.mnBoardElement.nativeElement.offsetWidth;
+        this.mnBoardWrapperElement.nativeElement.style.transform = `scale(${ref/widthWrapper})`;
+    };
 
-        this.scale = `scale(${width/widthWrapper})`;
-
-    }
 }
