@@ -16,12 +16,9 @@
 
         <img src="/app/assets/images/{{svg}}.svg" [hidden]="!svg"/>
 
-
-
-
     </div>
 
-    <ul class="mn-pawns">
+    <ul class="mn-pawns" *ngIf="players?.length">
         <li *ngFor="let player of players">
             <mn-pawn [player]="player"></mn-pawn>
         </li>

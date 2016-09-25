@@ -4,7 +4,7 @@
 
     <div class="mn-board-wrapper" #mnBoardWrapper>
 
-        <div *ngFor="let row of [0,1,2,3]" class="mn-board-group-{{row+1}}">
+        <div *ngFor="let row of [0,1,2,3]" class="mn-board-groups mn-board-group-{{row+1}}">
             <div>
                 <mn-case *ngFor="let case of cases | slice : (row * 10) : (10 + row * 10);"
                          [caseInfo]="case"
@@ -12,6 +12,10 @@
             </div>
         </div>
 
+
+        <div class="mn-current-case" *ngIf="cases?.length">
+            <mn-case [caseInfo]="cases[currentCaseIndex]"></mn-case>
+        </div>
     </div>
 
 </div>

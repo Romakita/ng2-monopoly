@@ -1,17 +1,22 @@
 
-<div *ngFor="let player of players" class="player">
+<div *ngFor="let player of players" class="player row" [class.active]="player.id === currentPlayerIndex">
 
-    <mn-pawn [player]="player"></mn-pawn>
+    <div class="col m6">
 
-    <br />
+        <mn-pawn [player]="player" ></mn-pawn>
 
-    <span class="player-info">
-        <fa [name]="'money'" class="green-text"></fa> {{player?.money | number : '1.0-0'}} €
-    </span>
+    </div>
 
-    <span class="player-info">
-        <fa [name]="'home'" class="green-text"></fa> 0
-    </span>
+    <div class="col m6">
+
+        <span class="player-info">
+            <fa [name]="'money'" class="green-text"></fa> {{player?.money | number : '1.0-0'}} €
+        </span>
+
+        <span class="player-info">
+            <fa [name]="'home'" class="green-text"></fa> 0
+        </span>
+    </div>
 
 </div>
 

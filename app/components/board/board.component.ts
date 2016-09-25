@@ -6,8 +6,7 @@ import {
     ElementRef,
     AfterViewInit,
     Input,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef
+    ChangeDetectorRef, OnChanges, SimpleChanges
 } from '@angular/core';
 
 @Component({
@@ -15,10 +14,9 @@ import {
     templateUrl: 'board.component.html',
     styleUrls: ['board.component.css'],
     moduleId: module.id,
-    encapsulation: ViewEncapsulation.Emulated,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.Emulated
 })
-export default class BoardComponent implements AfterViewInit {
+export default class BoardComponent implements AfterViewInit, OnChanges {
 
     @Input()
     private cases: ICase[];
@@ -26,11 +24,16 @@ export default class BoardComponent implements AfterViewInit {
     @Input()
     private players: IPlayer[];
 
+    @Input()
+    private currentPlayerIndex: number = 0;
+
     @ViewChild('mnBoard')
     private mnBoardElement: ElementRef;
 
     @ViewChild('mnBoardWrapper')
     private mnBoardWrapperElement: ElementRef;
+
+    private currentCaseIndex: number = 0;
 
     constructor(
         private cd: ChangeDetectorRef
@@ -48,6 +51,34 @@ export default class BoardComponent implements AfterViewInit {
      */
     private onResize($event) {
         this.resize();
+    }
+
+
+    public ngOnChanges(changes: SimpleChanges): void {
+
+        if ("players" in changes) {
+            this.updateCurrentCase();
+        }
+
+        if ("currentPlayer" in changes) {
+            this.updateCurrentCase();
+        }
+
+        if ("cases" in changes) {
+            this.updateCurrentCase();
+        }
+
+    }
+
+    private updateCurrentCase(){
+
+        if (this.players && this.cases && this.currentPlayerIndex !== undefined) {
+
+            const currentPlayer = this.players[this.currentPlayerIndex];
+
+            this.currentCaseIndex = currentPlayer.location;
+
+        }
     }
 
     /**

@@ -11,19 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var PlayersComponent = (function () {
     function PlayersComponent() {
-        console.log("inputs are " + this.players);
-        console.log(this);
     }
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
     ], PlayersComponent.prototype, "players", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], PlayersComponent.prototype, "currentPlayerIndex", void 0);
     PlayersComponent = __decorate([
         core_1.Component({
             selector: 'mn-players',
             templateUrl: 'players.component.html',
             styleUrls: ['players.component.css'],
-            moduleId: module.id
+            moduleId: module.id,
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
     ], PlayersComponent);

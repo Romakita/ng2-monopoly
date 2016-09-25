@@ -11,10 +11,10 @@ import {Observable} from 'rxjs';
     encapsulation: ViewEncapsulation.Emulated
 })
 export default class BoardViewComponent {
+
     private players: Observable<IPlayer[]>;
     private cases: Observable<ICase[]>;
-
-    private counter: number = 0;
+    private currentPlayerIndex: number = 0;
 
     constructor(
         private playersService: PlayersService,
@@ -26,7 +26,7 @@ export default class BoardViewComponent {
         this.players = playersService.getPlayers();
         this.cases = casesService.getCases();
 
-        setTimeout(() => {
+        /*setTimeout(() => {
 
             this.players
                 .subscribe((players) => {
@@ -35,6 +35,6 @@ export default class BoardViewComponent {
                     return players.concat([]);
                 });
 
-        }, 2000);
+        }, 2000);*/
     }
 }

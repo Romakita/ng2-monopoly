@@ -8,6 +8,7 @@
     left:0px;
     right:0px;
     bottom:0px;
+
 }
 .mn-board .mn-board-wrapper{
     position: relative;
@@ -16,7 +17,7 @@
     transform-origin: left top;
     background: #A7E9DB;
 }
-.mn-board .mn-board-wrapper > div  {
+.mn-board .mn-board-wrapper > .mn-board-groups  {
     width: calc(195px * 11);
     height: calc(195px * 11);
     position: absolute;
@@ -51,4 +52,12 @@
 
 .mn-board div .mn-case {
     float: left;
+}
+
+
+.mn-board .mn-current-case {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: scale(2) translate(-25%);
 }

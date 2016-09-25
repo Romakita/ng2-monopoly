@@ -1,9 +1,39 @@
 
-    <div class="col-1">
-        <h5>Players</h5>
-        <mn-players [players]="players | async"></mn-players>
-    </div>
+<ul class="col-1 z-depth-1 ">
 
-    <mn-board class="col-2" [cases]="cases | async" [players]="players | async">
+    <li>
+        <div class="mn-logo">
+            <img src="app/assets/images/monopoly.png" />
+        </div>
+    </li>
 
-    </mn-board>
+    <li>
+        <a href="" routerLink="/new-game">
+            <i class="material-icons">
+                replay
+            </i>
+            New Game
+        </a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+
+    <li>
+        <a class="subheader">Players</a>
+    </li>
+
+    <li>
+        <mn-players [players]="players | async"
+                    [currentPlayerIndex]="currentPlayerIndex"></mn-players>
+    </li>
+
+
+
+</ul>
+<mn-board class="col-2"
+          [cases]="cases | async"
+          [players]="players | async"
+          [currentPlayerIndex]="currentPlayerIndex">
+
+</mn-board>
