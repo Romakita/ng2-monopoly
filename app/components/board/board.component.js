@@ -9,46 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var cases_service_1 = require('../../services/cases/cases.service');
 var BoardComponent = (function () {
-    function BoardComponent(casesService) {
+    function BoardComponent(cd) {
         var _this = this;
-        this.casesService = casesService;
+        this.cd = cd;
         /**
          * Calculate viewport of the board.
          */
         this.resize = function () {
-            console.log('Board height', _this.mnBoardElement.nativeElement.offsetWidth);
             var width = +_this.mnBoardElement.nativeElement.offsetWidth;
+            var height = +_this.mnBoardElement.nativeElement.offsetHeight;
             var widthWrapper = +_this.mnBoardWrapperElement.nativeElement.offsetWidth;
-            _this.boardHeight = +_this.mnBoardElement.nativeElement.offsetWidth;
-            _this.scale = "scale(" + width / widthWrapper + ")";
+            var ref = Math.min(width, height);
+            _this.mnBoardWrapperElement.nativeElement.style.transform = "scale(" + ref / widthWrapper + ")";
         };
     }
-    /**
-     * Called when component is initialized with all input data.
-     */
-    BoardComponent.prototype.ngOnInit = function () {
-        this.getCases();
-    };
-    /**
-     * Called when view component is initialized.
-     */
     BoardComponent.prototype.ngAfterViewInit = function () {
-        setTimeout(this.resize);
-    };
-    /**
-     * Get all cases an build board.
-     * @returns {Subscription}
-     */
-    BoardComponent.prototype.getCases = function () {
-        var _this = this;
-        return this
-            .casesService
-            .getCases()
-            .subscribe(function (cases) {
-            _this.cases = cases;
-        });
+        this.resize();
     };
     /**
      * Triggered when Window are resized.
@@ -57,6 +34,14 @@ var BoardComponent = (function () {
     BoardComponent.prototype.onResize = function ($event) {
         this.resize();
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BoardComponent.prototype, "cases", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BoardComponent.prototype, "players", void 0);
     __decorate([
         core_1.ViewChild('mnBoard'), 
         __metadata('design:type', core_1.ElementRef)
@@ -71,9 +56,10 @@ var BoardComponent = (function () {
             templateUrl: 'board.component.html',
             styleUrls: ['board.component.css'],
             moduleId: module.id,
-            encapsulation: core_1.ViewEncapsulation.Emulated
+            encapsulation: core_1.ViewEncapsulation.Emulated,
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [cases_service_1.default])
+        __metadata('design:paramtypes', [core_1.ChangeDetectorRef])
     ], BoardComponent);
     return BoardComponent;
 }());

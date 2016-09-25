@@ -22,6 +22,7 @@ var PlayersComponent = (function () {
         core_1.Component({
             selector: 'mn-players',
             templateUrl: 'players.component.html',
+            styleUrls: ['players.component.css'],
             moduleId: module.id
         }), 
         __metadata('design:paramtypes', [])

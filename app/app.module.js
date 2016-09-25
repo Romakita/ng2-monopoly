@@ -24,7 +24,11 @@ var cases_service_1 = require('./services/cases/cases.service');
 var players_service_1 = require('./services/players/players.service');
 var fakePlayers_service_1 = require('./services/players/fakePlayers.service');
 var localStorage_service_1 = require('./services/localStorage/localStorage.service');
+var monopoly_service_1 = require('./services/monopoly/monopoly.service');
 var input_component_1 = require('./components/input/input.component');
+var pawn_component_1 = require('./components/pawn/pawn.component');
+var components_1 = require('angular2-fontawesome/components');
+var casePlayers_pipe_1 = require('./pipes/casePlayers.pipe');
 var AppModule = (function () {
     function AppModule() {
         console.log('Start appModule');
@@ -47,14 +51,18 @@ var AppModule = (function () {
                 navbar_component_1.default,
                 boardView_component_1.default,
                 newGameView_component_1.default,
-                input_component_1.default
+                input_component_1.default,
+                pawn_component_1.default,
+                components_1.FaComponent,
+                casePlayers_pipe_1.CasePlayersPipe
             ],
             // Services depedencies
             providers: [
                 { provide: players_service_1.default, useClass: fakePlayers_service_1.default },
                 cases_service_1.default,
                 app_routes_1.appRoutingProviders,
-                localStorage_service_1.LocalStorageService
+                localStorage_service_1.LocalStorageService,
+                monopoly_service_1.default
             ],
             // Main components
             bootstrap: [
