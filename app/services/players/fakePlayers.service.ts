@@ -2,9 +2,11 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Rx';
 import {LocalStore} from '../localStorage/localStorage.decorator';
+import {IPlayersService} from './players.interface';
+
 
 @Injectable()
-export default class FakePlayersService {
+export default class FakePlayersService implements IPlayersService {
 
     @LocalStore()
     private players: IPlayer[];
@@ -19,7 +21,7 @@ export default class FakePlayersService {
      * @param players
      * @returns {any}
      */
-    setPlayers(players: IPlayer[]): Observable<IPlayer[]> {
+    public setPlayers(players: IPlayer[]): Observable<IPlayer[]> {
 
         this.players = players.map((p, index) => {
             p.id = index;
@@ -35,8 +37,8 @@ export default class FakePlayersService {
      */
     public getPlayers(): Observable<IPlayer[]> {
 
-        return Observable.of<IPlayer[]>(
-             this.players || []
-        );
+        console.log('GetPlayers');
+
+        return Observable.of(this.players || []);
     }
 }

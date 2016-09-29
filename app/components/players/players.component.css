@@ -3,7 +3,12 @@
 }
 
 .player{
-    padding: 5px;
+    padding: 7px 5px 2px;
+    margin-bottom:5px;
+}
+
+.player.active {
+    background: #e0e0e0;
 }
 
 .player .player-info{

@@ -2,15 +2,21 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs';
+import {IPlayersService} from './players.interface';
 
 
 @Injectable()
-export default class PlayersService {
+export default class PlayersService implements IPlayersService {
 
     constructor(private http: Http) {
 
     }
 
+    /**
+     *
+     * @param players
+     * @returns {Observable<R>}
+     */
     setPlayers(players: IPlayer[]): Observable<IPlayer[]> {
         return this.http
             .post(`rest/players`, {players: players})
@@ -21,6 +27,7 @@ export default class PlayersService {
                 });
             });
     }
+
     /**
      *
      */

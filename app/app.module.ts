@@ -21,6 +21,7 @@ import MaterializeInputDirective from './components/input/input.component';
 import PawnComponent from './components/pawn/pawn.component';
 import {FaComponent} from 'angular2-fontawesome/components';
 import {CasePlayersPipe} from './pipes/casePlayers.pipe';
+import DiceComponent from './components/dice/dice.component';
 
 @NgModule({
 
@@ -44,7 +45,8 @@ import {CasePlayersPipe} from './pipes/casePlayers.pipe';
         MaterializeInputDirective,
         PawnComponent,
         FaComponent,
-        CasePlayersPipe
+        CasePlayersPipe,
+        DiceComponent
     ],
 
     // Services depedencies

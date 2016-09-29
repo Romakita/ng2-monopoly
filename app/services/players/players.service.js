@@ -15,6 +15,11 @@ var PlayersService = (function () {
     function PlayersService(http) {
         this.http = http;
     }
+    /**
+     *
+     * @param players
+     * @returns {Observable<R>}
+     */
     PlayersService.prototype.setPlayers = function (players) {
         return this.http
             .post("rest/players", { players: players })

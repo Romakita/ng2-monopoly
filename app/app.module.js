@@ -29,6 +29,7 @@ var input_component_1 = require('./components/input/input.component');
 var pawn_component_1 = require('./components/pawn/pawn.component');
 var components_1 = require('angular2-fontawesome/components');
 var casePlayers_pipe_1 = require('./pipes/casePlayers.pipe');
+var dice_component_1 = require('./components/dice/dice.component');
 var AppModule = (function () {
     function AppModule() {
         console.log('Start appModule');
@@ -54,7 +55,8 @@ var AppModule = (function () {
                 input_component_1.default,
                 pawn_component_1.default,
                 components_1.FaComponent,
-                casePlayers_pipe_1.CasePlayersPipe
+                casePlayers_pipe_1.CasePlayersPipe,
+                dice_component_1.default
             ],
             // Services depedencies
             providers: [

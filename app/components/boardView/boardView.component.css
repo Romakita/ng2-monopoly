@@ -89,3 +89,25 @@
     top: 5px;
     bottom: 5px;
 }
+
+
+.mn-dices-content {
+    position: absolute;
+    top:0px;
+    left:300px;
+    right: 0px;
+    bottom:0px;
+    background:rgba(255,255,255, 0.8);
+}
+
+.mn-dices-content > div {
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.mn-add-dice {
+    font-family: 'MarioGame', sans-serif;
+    font-size: 80px;
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black, 3px -3px black, -3px 3px black, -3px -3px black, 3px 3px black;
+}

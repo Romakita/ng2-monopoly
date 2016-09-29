@@ -28,7 +28,9 @@
                     [currentPlayerIndex]="currentPlayerIndex"></mn-players>
     </li>
 
-
+    <li *ngIf="showBtnPlayDices">
+        <a (click)="playDices()" class="center-align">Play Dices</a>
+    </li>
 
 </ul>
 <mn-board class="col-2"
@@ -37,3 +39,20 @@
           [currentPlayerIndex]="currentPlayerIndex">
 
 </mn-board>
+
+<div class="mn-dices-content valign-wrapper" *ngIf="showDices">
+    <div class="valign center-align">
+        <div class="row">
+            <div class="col"><!--[disabled]="currentDice > 1"-->
+                <mn-dice [stop]="stop" (onDiceClicked)="onDiceClicked(0, $event)" ></mn-dice>
+            </div>
+            <div class="col mn-add-dice">
+                +
+            </div>
+            <div class="col" >
+                <mn-dice [stop]="stop" (onDiceClicked)="onDiceClicked(1, $event)"></mn-dice>
+            </div>
+        </div>
+
+    </div>
+</div>
