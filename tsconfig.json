@@ -15,14 +15,13 @@
     "types": [
       "node",
       "hammerjs",
-      "jquery"
+      "jquery",
+      "karma",
+      "jasmine"
     ]
   },
   "exclude": [
     "node_modules",
-    "src/ponies",
-    "src/pony",
-    "src/races",
     "dist"
   ],
 
