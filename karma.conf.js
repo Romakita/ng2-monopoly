@@ -14,8 +14,9 @@ module.exports = function(config) {
         plugins: [
             require('karma-jasmine'),
             require('karma-chrome-launcher'),
-            require('karma-jasmine-html-reporter'), // click "Debug" in browser to see it
-            require('karma-htmlfile-reporter') // crashing w/ strange socket error
+            require('karma-mocha-reporter'),
+            require('karma-coverage'),
+            require('karma-remap-coverage'),
         ],
 
         customLaunchers: {
@@ -83,9 +84,11 @@ module.exports = function(config) {
         },
 
         exclude: [],
-        preprocessors: {},
-        // disabled HtmlReporter; suddenly crashing w/ strange socket error
-        reporters: ['progress', 'kjhtml'],//'html'],
+        preprocessors: {
+            'app/**/!(*spec).js': ['coverage']
+        },
+
+        reporters: ['mocha', 'coverage', 'remap-coverage'],
 
         // HtmlReporter configuration
         htmlReporter: {
@@ -102,6 +105,17 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
         autoWatch: true,
         browsers: ['Chrome'],
-        singleRun: false
+        singleRun: false,
+
+
+        coverageReporter: {
+            type: 'in-memory'
+        },
+
+        remapCoverageReporter: {
+            'text-summary': null,
+            json: './coverage/coverage.json',
+            html: './coverage/html'
+        },
     })
 };
