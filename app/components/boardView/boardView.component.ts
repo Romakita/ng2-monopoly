@@ -1,7 +1,7 @@
-import {ViewEncapsulation, Component, ChangeDetectorRef} from '@angular/core';
+import {ViewEncapsulation, Component, ChangeDetectorRef, OnInit, AfterViewInit} from '@angular/core';
 import PlayersService from '../../services/players/players.service';
 import CasesService from '../../services/cases/cases.service';
-import {Observable} from 'rxjs/Rx';
+import {Observable, Subject} from 'rxjs/Rx';
 import MonopolyService from '../../services/monopoly/monopoly.service';
 
 @Component({
@@ -11,35 +11,101 @@ import MonopolyService from '../../services/monopoly/monopoly.service';
     moduleId: module.id,
     encapsulation: ViewEncapsulation.Emulated
 })
-export default class BoardViewComponent {
+export default class BoardViewComponent implements OnInit, AfterViewInit {
 
     private players: Observable<IPlayer[]>;
     private cases: Observable<ICase[]>;
+
     private currentPlayerIndex: number = 0;
-    private dices: number[] = [];
+//    private dices: number[] = [];
     private showDices: boolean = false;
     private showBtnPlayDices: boolean = true;
 
     constructor(
         private playersService: PlayersService,
         private casesService: CasesService,
-        private monopolyService: MonopolyService,
-        private cd: ChangeDetectorRef
+        private monopolyService: MonopolyService
     ) { //
 
+    }
 
-        this.players = playersService.getPlayers();
-        this.cases = casesService.getCases().map((d) => {
-            console.log('Case =>', d);
-            return d;
+    /**
+     *
+     */
+    public ngOnInit(): void {
+
+        this.players = this.monopolyService.players;
+
+        //this.players = this.playersService.getPlayers()
+
+        //    .map(p => {
+        //         console.log('p =>', p);
+        //        return p;
+        //    })
+        //.switchMap(e => Observable.of(e))
+        //.catch(e => (console.error(e)));
+
+        //.subscribe(() =>{})
+
+
+            /*this.monopolyService.players;
+
+        this.players.switchMap((o) => {
+
+            return Observable.from(o);
         });
+*/
+        //this.players.subscribe(o => console.log(o));
+
+            //Observable.concat(this.monopolyService.players);
+
+        // console.log('this.players', this.players);
+
+        /*this.playersService
+         .getPlayers()
+         .subscribe((c) => {
+         console.log('subscribeC', c);
+         });
+
+         this.players.subscribe((e) => {
+         console.log('subscribe', e);
+
+         });*/
+/*
+        this.players.subscribe({
+         next: (e) => {console.log('nextPartial', e)},
+         error: function (e) { throw e; }
+         });
+*/
+        this.cases = this.casesService.getCases();
+
+        console.log('This.cases', this.cases);
+        /*
+         this.players
+         .map((c) => {
+         console.log("c", c);
+         return c;
+         })
+         .subscribe(this.onPlayersUpdated);*/
+
+    }
+
+    /**
+     *
+     */
+    public ngAfterViewInit(): void {
+
+        this.monopolyService
+            .initializePlayers()
+            .subscribe(() => {
+                this.players.subscribe(this.onPlayersUpdated);
+            });
 
     }
 
     public playDices(){
         this.showDices = true;
         this.showBtnPlayDices = false;
-        this.dices = [];
     }
 
     /**
@@ -48,30 +114,23 @@ export default class BoardViewComponent {
      * @param diceValue
      */
     public onDiceClicked(diceIndex: number, diceValue: number) {
-        console.log("Dices", diceValue, diceIndex);
 
-        this.dices[diceIndex] = diceValue;
+        console.log('DiceIndex', diceIndex, 'diceValue', diceValue);
 
-        if (this.dices[0] && this.dices[1]) {
-            this.showDices = false;
+        this.monopolyService.setDice(diceIndex, diceValue);
+    }
 
-            this
-                .monopolyService
-                .playerMoveTo(this.currentPlayerIndex, this.dices)
-                .subscribe((players: IPlayer[]) => {
-                    setTimeout(() => {
+    /**
+     *
+     * @param players
+     */
+    private onPlayersUpdated = (players: IPlayer[]) => {
 
-                        this.currentPlayerIndex = (this.currentPlayerIndex+1) % players.length;
+        console.log('onPlayersUpdated players', players);
 
-                        this.players = Observable.of(players);
-
-                        this.showBtnPlayDices = true;
-
-                    }, 1000);
-                });
-        }
-
-
+        this.currentPlayerIndex = this.monopolyService.nextPlayer();
+        this.showDices = false;
+        this.showBtnPlayDices = true;
     }
 
 }

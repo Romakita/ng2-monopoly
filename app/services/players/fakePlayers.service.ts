@@ -28,6 +28,8 @@ export default class FakePlayersService implements IPlayersService {
             return p;
         });
 
+
+
         return Observable.of(this.players);
     }
 
@@ -36,9 +38,6 @@ export default class FakePlayersService implements IPlayersService {
      * @returns {any}
      */
     public getPlayers(): Observable<IPlayer[]> {
-
-        console.log('GetPlayers');
-
-        return Observable.of(this.players || []);
+        return Observable.of(this.players.concat([]) || []);
     }
 }

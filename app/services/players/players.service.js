@@ -24,10 +24,9 @@ var PlayersService = (function () {
         return this.http
             .post("rest/players", { players: players })
             .map(function (response) { return response.json(); })
-            .map(function (players) {
-            return players.forEach(function (player, index) {
-                player.id = index;
-            });
+            .map(function (players, index) {
+            players[index] = index;
+            return players;
         });
     };
     /**

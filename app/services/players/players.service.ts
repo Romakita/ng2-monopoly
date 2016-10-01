@@ -21,10 +21,11 @@ export default class PlayersService implements IPlayersService {
         return this.http
             .post(`rest/players`, {players: players})
             .map((response: Response) => response.json())
-            .map((players) => {
-                return players.forEach((player, index) => {
-                    player.id = index;
-                });
+            .map((players, index) => {
+
+                players[index] = index;
+
+                return players;
             });
     }
 
