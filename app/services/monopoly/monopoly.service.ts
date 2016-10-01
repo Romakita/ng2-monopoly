@@ -30,9 +30,15 @@ export default class MonopolyService {
             p.location = 0;
         });
 
-        return this
+        let observable = this
             .playersService
             .setPlayers(players);
+
+        observable.subscribe((players) => {
+            this.subjectPlayers.next(players);
+        });
+
+        return observable;
 
     }
 
