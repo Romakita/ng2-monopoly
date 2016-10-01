@@ -8,7 +8,7 @@ export default class MonopolyService {
     private subjectDices: Subject<number>[];
     private subjectPlayers: Subject<IPlayer[]> = new Subject<IPlayer[]>();
 
-    private currentPlayer: number = 1;
+    private currentPlayerIndex: number = 0;
     private nbPlayers: number = 2;
     private nextAction: MonopolyAction;
     private nbDoubleRolled: number = 0;
@@ -84,7 +84,7 @@ export default class MonopolyService {
             })
             .switchMap((players) => {
 
-                players = this.applyRules(this.currentPlayer, dices, players);
+                players = this.applyRules(this.currentPlayerIndex, dices, players);
 
                 return this.playersService.setPlayers(players);
             })
@@ -175,7 +175,22 @@ export default class MonopolyService {
      * @returns {number}
      */
     public nextPlayer(): number {
-        return this.currentPlayer = (this.currentPlayer+1) % this.nbPlayers;
+
+        console.log('Monopoly.nextPlayer() => actually :', this.currentPlayerIndex);
+
+        this.currentPlayerIndex = (this.currentPlayerIndex+1) % this.nbPlayers;
+
+        console.log('Monopoly.nextPlayer() => next :', this.currentPlayerIndex);
+
+        return this.currentPlayerIndex;
+    }
+
+    /**
+     *
+     * @returns {number}
+     */
+    public getCurrentPlayerIndex(){
+        return this.currentPlayerIndex;
     }
 }
 
