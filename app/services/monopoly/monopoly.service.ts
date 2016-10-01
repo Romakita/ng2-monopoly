@@ -10,6 +10,8 @@ export default class MonopolyService {
 
     private currentPlayer: number = 1;
     private nbPlayers: number = 2;
+    private nextAction: MonopolyAction;
+    private nbDoubleRolled: number = 0;
 
     constructor(private playersService: PlayersService) {
 
@@ -35,7 +37,8 @@ export default class MonopolyService {
     }
 
     /**
-     *
+     * Get players and initialize observable players.
+     * @returns {Observable<IPlayer[]>}
      */
     public initializePlayers(): Observable<IPlayer[]> {
 
@@ -43,7 +46,8 @@ export default class MonopolyService {
 
         observable.subscribe((players: IPlayer[]) => {
 
-            console.log('initializePlayers =>', players);
+            console.log('Monopoly.initializePlayers.subscribe() =>', players);
+
             this.nbPlayers = players.length;
 
             this.subjectPlayers.next(players);
@@ -53,9 +57,12 @@ export default class MonopolyService {
     }
 
     /**
-     *
+     * Create a sequence to observe the change on two dices.
+     * The sequence waits two dice are rolled to trigger the next event.
+     * When the event is triggered, the rules are applied for the current player.
+     * Finally, the players list are updated. The Subject players are updated too.
      */
-    public createDicesSequence(){
+    public createDicesSequence(): void {
         let dices;
 
         this.subjectDices = [
@@ -70,7 +77,6 @@ export default class MonopolyService {
             .switchMap((_dices_: number[]) => {
 
                 dices = _dices_;
-
 
                 console.log('Monopoly.createDicesSequence.switchMap() =>', dices);
 
@@ -125,9 +131,26 @@ export default class MonopolyService {
      */
     private applyRules(playerId: number, dices: number[], players: IPlayer[]): IPlayer[] {
 
-        console.log('players =>', playerId, dices);
+        console.log('Monopoly.applyRules() =>', playerId, dices);
 
         let player = players[playerId];
+        this.nextAction = MonopolyAction.NEXT_PLAYER;
+
+        // Calculate next action
+        if (dices[0] === dices[1]) { // DOUBLE
+            this.nbDoubleRolled++;
+
+            if(this.nbDoubleRolled < 3){
+                this.nextAction = MonopolyAction.PLAY_AGAIN;
+            }  else {
+                this.nextAction = MonopolyAction.GOTO_PRISON;
+                player.location = 30;
+                this.nbDoubleRolled = 0;
+
+                return;
+            }
+
+        }
 
         player.location += +dices[0] + +dices[1];
 
@@ -141,10 +164,23 @@ export default class MonopolyService {
     }
 
     /**
+     *
+     * @returns {MonopolyAction}
+     */
+    public getNextAction(): MonopolyAction {
+        return this.nextAction;
+    }
+    /**
      * Update currentPlayer index.
      * @returns {number}
      */
     public nextPlayer(): number {
         return this.currentPlayer = (this.currentPlayer+1) % this.nbPlayers;
     }
+}
+
+export enum MonopolyAction {
+    NEXT_PLAYER,
+    GOTO_PRISON,
+    PLAY_AGAIN
 }

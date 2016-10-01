@@ -38,6 +38,6 @@ export default class FakePlayersService implements IPlayersService {
      * @returns {any}
      */
     public getPlayers(): Observable<IPlayer[]> {
-        return Observable.of(this.players.concat([]) || []);
+        return Observable.of((this.players || []).concat([]));
     }
 }
