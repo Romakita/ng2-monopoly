@@ -3,7 +3,6 @@
 import {TestBed, async} from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
 
-
 import PlayersComponent from './players.component';
 import PawnComponent from '../pawn/pawn.component';
 import {FaComponent} from 'angular2-fontawesome/components';
